@@ -7,7 +7,9 @@ const _ = require("lodash");
 const mongoose = require("mongoose");
 const { response } = require("express");
 
-mongoose.connect("mongodb://localhost:27017/diaryDB");
+mongoose.connect("mongodb+srv://mk:mk98@cluster0.gldzot4.mongodb.net/diaryDB");
+
+// mongoose.connect("mongodb://localhost:27017/diaryDB");
 
 const itemSchema = new mongoose.Schema({
   title: String,
@@ -98,6 +100,6 @@ app.get("/posts/:postName", function (req, res) {
   });
 });
 
-app.listen(process.env.PORT || 3000, function () {
+app.listen( process.env.PORT || 3000, function () {
   console.log("Server started on port 3000");
 });
