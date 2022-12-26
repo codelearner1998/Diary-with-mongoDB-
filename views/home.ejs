@@ -1,16 +1,29 @@
 <%- include("partials/header");-%> 
 
-<h1>Home </h1>
-<p><%=startingContent%></p>
+<form action="/delete" method="post">
+<input type="checkbox" name="deleteOne" value="" onChange="this.form.submit()">
+</form>
+<div >
 
-<% console.log("posts");  %> 
+<h1> Home </h1>
+<p>  <%=startingContent%></p>
 
-<% posts.forEach(function(post){  %>         <!-- instead of  for loop you can use this -->
+</div>
+
+
+
+<% posts.forEach(function(post){  %>    
+    
+    <form action="/delete" method="post">
+    <input type="checkbox"  name="deleteOne" value=<%=post._id%> onChange="this.form.submit()">
+    </form>
+    <div>
     <h1><%=post.title%> </h1>
     <p>
         <%= post.content.substring(0,100)+"..."%>
         <a href="/posts/<%=post.title%> ">Read more..</a>
      </p>
+    </div> 
 
 <% }); %>
     

@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const _ = require("lodash");
 const mongoose = require("mongoose");
-const { response } = require("express");
+
 
 mongoose.connect("mongodb+srv://mk:mk98@cluster0.gldzot4.mongodb.net/diaryDB");
 
@@ -41,7 +41,8 @@ app.get("/", function (req, res) {
     if (err) {
       console.log(err);
     } else {
-      res.render("home", {
+
+        res.render("home", {
         startingContent: homeStartingContent,
         posts: doc,
       });
@@ -99,6 +100,24 @@ app.get("/posts/:postName", function (req, res) {
     }
   });
 });
+
+
+app.post("/delete",(req,res)=>{
+  const deleteThis =   req.body.deleteOne
+
+  Item.deleteOne({_id:deleteThis},function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Succesfully deleted the Item");
+      res.redirect("/")
+      
+    }
+    
+  })
+
+
+})
 
 app.listen( process.env.PORT || 3000, function () {
   console.log("Server started on port 3000");
